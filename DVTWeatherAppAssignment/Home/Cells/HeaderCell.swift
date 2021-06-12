@@ -18,11 +18,11 @@ class HeaderCell: UITableViewCell {
         func text(from value: String)-> String {
             switch self {
             case .min:
-                return value + "\n min"
+                return value + "\n Min"
             case .current:
-                return value + "\n current"
+                return value + "\n Current"
             case .max:
-                return value + "\n max"
+                return value + "\n Max"
             }
         }
     }

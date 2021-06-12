@@ -29,6 +29,8 @@
 		AD73894E2670061000588C8F /* URLResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD73894D2670061000588C8F /* URLResponse.swift */; };
 		AD73895026733E6900588C8F /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD73894F26733E6900588C8F /* AppRouter.swift */; };
 		AD7389532673413F00588C8F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7389522673413F00588C8F /* HomeViewModel.swift */; };
+		AD73895626746B7E00588C8F /* CenteredButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD73895526746B7E00588C8F /* CenteredButton.swift */; };
+		AD738959267471CB00588C8F /* locationSeachViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD738958267471CB00588C8F /* locationSeachViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +70,8 @@
 		AD73894D2670061000588C8F /* URLResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLResponse.swift; sourceTree = "<group>"; };
 		AD73894F26733E6900588C8F /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		AD7389522673413F00588C8F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		AD73895526746B7E00588C8F /* CenteredButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenteredButton.swift; sourceTree = "<group>"; };
+		AD738958267471CB00588C8F /* locationSeachViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locationSeachViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +113,7 @@
 		AD7388F3266BEE3C00588C8F /* DVTWeatherAppAssignment */ = {
 			isa = PBXGroup;
 			children = (
+				AD73895726746FEB00588C8F /* Search */,
 				AD738933266CA58300588C8F /* Home */,
 				AD73892F266BFC5700588C8F /* Extensions */,
 				AD738924266BF18D00588C8F /* Networking */,
@@ -165,6 +170,7 @@
 		AD738933266CA58300588C8F /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				AD73895426746B6B00588C8F /* Views */,
 				AD7389512673412A00588C8F /* ViewModel */,
 				AD738937266CA63300588C8F /* Cells */,
 				AD738936266CA62400588C8F /* Extensions */,
@@ -198,6 +204,22 @@
 				AD7389522673413F00588C8F /* HomeViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		AD73895426746B6B00588C8F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AD73895526746B7E00588C8F /* CenteredButton.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AD73895726746FEB00588C8F /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				AD738958267471CB00588C8F /* locationSeachViewController.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -302,8 +324,10 @@
 			files = (
 				AD738926266BF1E100588C8F /* URLParameterEncoding.swift in Sources */,
 				AD7389532673413F00588C8F /* HomeViewModel.swift in Sources */,
+				AD73895626746B7E00588C8F /* CenteredButton.swift in Sources */,
 				AD738928266BF3E600588C8F /* HTTPTask.swift in Sources */,
 				AD73894A266FF6EB00588C8F /* Weather.swift in Sources */,
+				AD738959267471CB00588C8F /* locationSeachViewController.swift in Sources */,
 				AD738931266C06E500588C8F /* WebService.swift in Sources */,
 				AD73894E2670061000588C8F /* URLResponse.swift in Sources */,
 				AD73892E266BFBD300588C8F /* Extensions.swift in Sources */,

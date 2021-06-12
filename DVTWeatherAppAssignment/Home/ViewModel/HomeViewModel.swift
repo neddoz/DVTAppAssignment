@@ -18,19 +18,27 @@ final class HomeViewModel: NSObject {
     fileprivate let locationManager = CLLocationManager()
     fileprivate var weatherForeCastList: [WeatherResult] = []
     fileprivate var todayWeather: WeatherResult?
+    
+    var isActionContainerHidden: Bool = false
 
-    init(mainImageView: UIImageView, todayWeatherLabel: UILabel, tableView: UITableView) {
+    init(mainImageView: UIImageView, todayWeatherLabel: UILabel, tableView: UITableView, location: CLLocationCoordinate2D? = nil) {
         self._mainImageView = mainImageView
         self._currentWeatherLabel = todayWeatherLabel
         self._tableView = tableView
         super.init()
         self.locationManager.delegate = self
 
-        guard locationManager.authorizationStatus == .notDetermined else {
-            locationManager.startUpdatingLocation()
-            return
+        if location == nil {
+            guard locationManager.authorizationStatus == .notDetermined else {
+                locationManager.startUpdatingLocation()
+                return
+            }
+            locationManager.requestWhenInUseAuthorization()
+        } else if let location = location {
+            fetchWeatheFor(location: location)
+            fetchWeatheForeCast(location: location)
+            isActionContainerHidden = true
         }
-        locationManager.requestWhenInUseAuthorization()
     }
 
     func numberOfSections()-> Int {
@@ -125,6 +133,7 @@ extension HomeViewModel:  CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        // TODO: - Build error handler and communicate to the user
         print(error.localizedDescription)
     }
 }
