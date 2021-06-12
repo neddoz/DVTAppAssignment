@@ -36,6 +36,13 @@ class HeaderCell: UITableViewCell {
         return label
     }
     
+    fileprivate lazy var dividerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .white
+        return view
+    }()
+    
     fileprivate lazy var labels: [UILabel] = {
         var labels = [UILabel]()
         Column.allCases.forEach { _ in
@@ -57,10 +64,17 @@ class HeaderCell: UITableViewCell {
         addSubview(columnStack)
         backgroundColor = .clear
         
+        addSubview(dividerView)
+
         columnStack.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
         columnStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
         columnStack.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
         columnStack.rightAnchor.constraint(equalTo: rightAnchor, constant: 0).isActive = true
+
+        dividerView.heightAnchor.constraint(equalToConstant: 2).isActive = true
+        dividerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
+        dividerView.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
+        dividerView.rightAnchor.constraint(equalTo: rightAnchor, constant: 0).isActive = true
     }
 
     func configure(with weather: Main) {
