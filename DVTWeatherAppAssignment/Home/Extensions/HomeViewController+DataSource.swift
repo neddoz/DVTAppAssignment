@@ -10,19 +10,21 @@ import UIKit
 extension HomeViewController: UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return viewModel.numberOfSections()
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return viewModel.numberOfRowsInSection()
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: HeaderCell.reuseIdentifier,
-                                                  for: indexPath) as? HeaderCell else {
+                                                           for: indexPath) as? HeaderCell,
+                  let main = viewModel.columnData() else {
                 return UITableViewCell()
             }
+            cell.configure(with: main)
             return cell
         }
 
@@ -30,6 +32,7 @@ extension HomeViewController: UITableViewDataSource {
                                               for: indexPath) as? WeatherBodyDetailCell else {
             return UITableViewCell()
         }
+        cell.configure(with: viewModel.result(for: indexPath.row - 1), resultItemNumber: indexPath.row + 1)
         return cell
     }
 }

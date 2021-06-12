@@ -13,6 +13,7 @@ final class HomeViewModel: NSObject {
     fileprivate var _mainImageView: UIImageView
     fileprivate var _currentWeatherLabel: UILabel
     fileprivate var _tableView: UITableView
+    fileprivate var _containerView: UIView?
 
     fileprivate let locationManager = CLLocationManager()
     fileprivate var weatherForeCastList: [WeatherResult] = []
@@ -37,14 +38,30 @@ final class HomeViewModel: NSObject {
     }
 
     func numberOfRowsInSection()-> Int {
-        return 6
+        if weatherForeCastList.count > 5 {
+            return 6
+        }
+        return weatherForeCastList.count + 1
     }
 
+    func updateBackgroundView(_ view: UIView) {
+        self._containerView = view
+    }
+    
     func heightForRowAt(row: Int)-> CGFloat {
         if row == 0 {
             return 50
         }
         return 45
+    }
+    
+    func result(for row: Int)-> WeatherResult {
+        return weatherForeCastList[row]
+    }
+
+    func columnData()-> Main? {
+        guard let data = todayWeather else {return nil}
+        return data.main
     }
 
     // Private Methods
@@ -53,11 +70,32 @@ final class HomeViewModel: NSObject {
             DispatchQueue.main.async { [weak self] in
                 switch result {
                 case .success(let weatherResult):
-                    self?._currentWeatherLabel.text = weatherResult.weather.first?.weatherDescription
+                    if let condition = WeatherCondition(rawValue: weatherResult.weather.first?.main ?? ""),
+                       let degreesText = String.degreesText(weatherResult.main.temp) {
+                        self?._currentWeatherLabel.text = degreesText + "\n\(condition.text())"
+                        self?._mainImageView.image = self?.image(for: condition)
+                        if let color = condition.color(),
+                           let view = self?._containerView {
+                            view.backgroundColor = color
+                        }
+                    }
+                    self?.todayWeather = weatherResult
+                    self?._tableView.reloadData()
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
             }
+        }
+    }
+    
+    fileprivate func image(for condition: WeatherCondition)-> UIImage? {
+        switch condition {
+        case .Clear:
+            return .init(named: "sea_sunny")
+        case .Clouds:
+            return .init(named: "sea_cloudy")
+        case .Rain:
+            return .init(named: "sea_rainny")
         }
     }
     

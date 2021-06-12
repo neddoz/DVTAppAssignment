@@ -18,24 +18,27 @@ class HomeViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    let containerViewStack: UIStackView = {
+        return UIStackView()
+    }()
 
     let imageView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
-        view.image = .init(named: "sea_sunny")
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     let todayWeatherInfoLabel: UILabel = {
         let label = UILabel()
-        label.text = "SomeText"
         label.textAlignment = .center
         label.textColor = .white
+        label.numberOfLines = 0
+        label.font = .systemFont(ofSize: 30)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,8 +48,11 @@ class HomeViewController: UIViewController {
     }
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        viewModel = HomeViewModel(mainImageView: imageView, todayWeatherLabel: todayWeatherInfoLabel)
+        viewModel = HomeViewModel(mainImageView: imageView,
+                                  todayWeatherLabel: todayWeatherInfoLabel,
+                                  tableView: mainTableview)
         super.init(nibName: nil, bundle: nil)
+        viewModel.updateBackgroundView(self.view)
     }
 
     required init?(coder: NSCoder) {

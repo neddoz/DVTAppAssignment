@@ -15,15 +15,14 @@ class HeaderCell: UITableViewCell {
         case current
         case max
         
-        func text(from value: Int)-> String {
-            let const = "\(value)"
+        func text(from value: String)-> String {
             switch self {
             case .min:
-                return const + "\n min"
+                return value + "\n min"
             case .current:
-                return const + "\n current"
+                return value + "\n current"
             case .max:
-                return const + "\n max"
+                return value + "\n max"
             }
         }
     }
@@ -48,7 +47,6 @@ class HeaderCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUpViews()
-        configure()
     }
     
     fileprivate func setUpViews() {
@@ -64,10 +62,21 @@ class HeaderCell: UITableViewCell {
         columnStack.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
         columnStack.rightAnchor.constraint(equalTo: rightAnchor, constant: 0).isActive = true
     }
-    
-    func configure() {
+
+    func configure(with weather: Main) {
         for i in 0..<labels.count {
-            labels[i].text = Column(rawValue: i)?.text(from: i)
+            var temp: Double = weather.temp
+            guard let col = Column(rawValue: i) else {return}
+            
+            if col == .min {
+                temp = weather.tempMin
+            } else if col == .max {
+                temp = weather.tempMax
+            }
+            
+            if let text = String.degreesText(temp) {
+                labels[i].text = col.text(from: text)
+            }
         }
     }
     

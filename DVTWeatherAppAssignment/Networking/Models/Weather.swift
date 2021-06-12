@@ -8,18 +8,18 @@
 import Foundation
 
 struct WeatherResult: Codable {
-    let coord: Coord
+    let coord: Coord?
     let weather: [Weather]
-    let base: String
+//    let base: String?
     let main: Main
-    let visibility: Int
-    let wind: Wind
-    let clouds: Clouds
-    let dt: Int
-    let sys: Sys
-    let timezone, id: Int
-    let name: String
-    let cod: Int
+//    let visibility: Int
+//    let wind: Wind
+//    let clouds: Clouds
+//    let dt: Int
+//    let sys: Sys
+//    let timezone, id: Int
+//    let name: String
+//    let cod: Int
 }
 
 struct WeatherForeCastList: Codable {

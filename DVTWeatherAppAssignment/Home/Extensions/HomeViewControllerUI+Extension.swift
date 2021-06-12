@@ -16,12 +16,13 @@ extension HomeViewController {
         mainTableview.backgroundView = nil
         mainTableview.backgroundColor = .clear
         
-        let containerViewStack = UIStackView(arrangedSubviews: [imageView, mainTableview])
+        containerViewStack.addArrangedSubview(imageView)
+        containerViewStack.addArrangedSubview(mainTableview)
+
         containerViewStack.axis = .vertical
         containerViewStack.distribution = .fillEqually
         
         containerViewStack.translatesAutoresizingMaskIntoConstraints = false
-        containerViewStack.backgroundColor = .red
         
         view.addSubview(containerViewStack)
         view.addSubview(todayWeatherInfoLabel)
